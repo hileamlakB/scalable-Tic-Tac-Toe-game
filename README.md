@@ -18,12 +18,12 @@ Enjoy!
 
 ## Links
 
-* Live Example - 
+* Live Example - (https://hileamlakb.github.io/scalable-Tic-Tac-Toe-game/) 
 * Github - 
 
 ## Installation
 
-* Fire up the [index.html]() file in any web browser and you'll be good to go!
+* Fire up the [index.html](https://hileamlakb.github.io/scalable-Tic-Tac-Toe-game/) file in any web browser and you'll be good to go!
 
 ## Contributors
 
