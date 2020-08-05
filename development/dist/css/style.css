@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+.gameContainer {
+  margin: 0 auto;
+  width: 300px;
+  height: 350px;
+}
+
+.gameContainer h1 {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  color: #0099ff;
+}
+
+.gameContainer .gameBoard {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.gameContainer .gameBoard .paper {
+  position: absolute;
+}
+
+.gameContainer .gameBoard .col {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  width: 300px;
+}
+
+.gameContainer .gameBoard .col .box {
+  width: 100px;
+  height: 100px;
+  border-spacing: 0;
+  background-color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameContainer .gameBoard .col .box p {
+  font-size: xxx-large;
+  color: #0099ff;
+}
+
+.gameContainer .gameBoard .col .box:hover {
+  transform: scale(0.9);
+}
+
+.gameContainer .gameBoard .col .box:nth-child(1), .gameContainer .gameBoard .col .box:nth-child(2) {
+  border-right: 2px solid #0099ff;
+}
+
+.gameContainer .gameBoard .col:nth-child(1) .box, .gameContainer .gameBoard .col:nth-child(2) .box {
+  border-bottom: 2px solid #0099ff;
+}
+
+.gameContainer .gameBoard .message {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 153, 255, 0.4);
+}
+
+.gameContainer .gameBoard .message p {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
