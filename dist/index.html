@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    
+  
+   
+   <div class="gameContainer">
+       <h1>Tic Tac Toe</h1>
+       <div class="gameBoard">
+           <div class="paper">
+                <div class="col" id="0">
+                    <div class="box" id="0"></div>
+                    <div class="box" id="1"></div>
+                    <div class="box" id="2"></div>
+                </div>
+                <div class="col" id="1">
+                    <div class="box" id="0"></div>
+                    <div class="box" id="1"></div>
+                    <div class="box" id="2"></div>
+                </div>
+                <div class="col" id="2">
+                    <div class="box" id="0"></div>
+                    <div class="box" id="1"></div>
+                    <div class="box" id="2"></div>
+                </div>
+                <div class="message"></div>
+           </div>
+           
+           
+
+        </div>
+   
+       <!-- <button class="btn-primary">Play</button> -->
+       <div class="controller">
+           <label for="against">Play Against: </label>
+            <select name="" id="playerId">
+
+                <option value="0">
+
+                </option>
+                <option value="1">
+                    Computer
+                </option>
+                <option selected value="2">
+                    Friend
+
+                </option>
+            </select>
+        
+        <button class="btn-primary" id="restart">Restart</button>
+        
+ 
+        
+    </div>
+       
+       
+   </div>
+
+  
+      
+   </div>
+</body>
+<script>
+    // class ticTacToe{
+    //     constructor(){
+    //         this.gameStarted = false
+    //         this.turn = "X"
+    //         this.board = squareArray(3)
+    //     }
+
+    //     squareArray (length){
+    //         _ = []
+    //         for(let i = 0; i<length; i++){
+    //             _.append([])
+    //             for(let j = 0; j<length; j++){
+    //                 _[i].append("")
+    //             }
+    //         }
+
+    //         return _
+    //     }
+    // }
+    // let gameStarted = false;
+    // let turn = "X";
+    // let emptyArray = function(){
+    //     return  [["","",""],
+    //                 ["","",""],
+    //                 ["","",""]]
+    // }
+    // let bordData = emptyArray()
+    // $(".box").click(function(){
+
+    //     //check if the game is already started and the playing mode is selected
+    //     //if it isnt prompt a requiing message
+    //     if (!gameStarted){
+    //         if ($("#playerId").val() == 0){
+    //             $(".message").append(
+    //                 `<p>Choose an opponent First</p>`
+    //             )
+
+    //             $(".message").css("display",'flex')
+    //             setTimeout(()=>{
+    //                 $(".message").empty();
+    //                 $(".message").css("display","none")},2000)
+    //         }
+    //         //if the playermode is choosen just start the game
+    //         else{
+    //             gameStarted = true;
+    //         }
+    //     }
+
+    //     //if the game is already started choose the player mode and 
+    //     // take the aproperiate action
+    //     if (gameStarted){
+    //         // if the game mode is with another player put the value and then 
+    //         //chekc the game status
+    //         if ($("#playerId").val() == 2){
+               
+    //             let col = parseInt(this.parentElement.id), row = parseInt(this.id); 
+                
+    //            if( $(this).html() == ''){
+    //                 $(this).append(`<p>${turn}</p>`)
+    //                 bordData[col][row] = turn;
+
+    //                 turn = (turn=='X')?"O":"X"
+    //             }
+
+    //             //check if the game is already oveer or 
+    //             //still continuing
+    //             let statusCheckResult = checkStatus(bordData)
+               
+    //             if(statusCheckResult){
+    //                 gameWon(statusCheckResult.slice(1,3))
+    //             }
+    //         }
+            
+    //     }
+       
+
+
+    // });
+
+    // function reset(){
+
+    // }
+
+    // function checkStatus(board){
+
+    //     //check if the game is over in the row
+    //     for (let i=0; i<board.length;i++){
+           
+    //        //
+    //        let rowStatus = checkRowStatus(board[i])
+    //         if(rowStatus[0]){
+    //             //[winingStartinggRow, windingStargincol]
+    //             return [true,[i,rowStatus[1]],"row"]
+                
+
+    //         }
+            
+    //     }
+        
+    //     //check if the game is over on the col
+    //     board = reverse(board)
+        
+    //     for (let i=0; i<board.length;i++){
+           
+    //        //
+    //        let colStatus = checkRowStatus(board[i])
+    //         if(colStatus[0]){
+    //             //[winingStartinggRow, windingStargincol]
+    //             return [true,[colStatus[1],i],"col"]
+                
+
+    //         }
+            
+    //     }
+    //     //check if the game is over on the diagonal
+
+       
+    //     return false
+    // }
+    // function checkRowStatus(row){
+
+    //     for(let i=0; i<row.length - 2;i++){
+
+    //         //slice a row of length three and see if 
+    //         //they are equal if the are we got  a winner if they 
+    //         //arent we will go the next
+    //         if(checkEquality(row.slice(i,i+3))){
+    //             return [true,i]
+    //         }
+           
+            
+         
+    //     }
+    //     return false
+
+    // }
+    // function checkEquality(list){
+
+    //     for(let j=0; j<list.length;j++){
+    //         //if one of them is false you can be
+    //         //sure that the game isnt over so handle that case here
+    //         if(list[j] == ''){
+                
+    //             return false
+    //         }
+    //         if (list[j]!=list[0]){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+
+    // }
+    // function reverse(list){
+
+        
+    //     newList = []
+    //     for(let i=0; i<list.length;i++){
+    //         newList.push([])
+    //         for(let j=0; j<list[0].length;j++){
+            
+    //             newList[i].push("")
+    //         }
+            
+    //     }
+
+    //     for(let i=0;i<list.length;i++){
+    //         for(let j=0;j<list[i].length;j++){
+    //             newList[j][i] = list[i][j];
+    //         }
+
+    //     }
+
+    
+
+    //     console.log(newList.length)
+    //     return(newList)
+
+    // }
+    // function gameWon(winPos){
+    //     //draw Streak
+    //     let value = $(document.body.getElementsByClassName("col")[winPos[0][0]].getElementsByClassName("box")[winPos[0][1]]).text()
+        
+    //     if(winPos[1]=="row"){
+    //         for(let i=winPos[0][1]; i<winPos[0][1]+3; i++){
+    //             $(document.body.getElementsByClassName("col")[winPos[0][0]].getElementsByClassName("box")[i]).css('background-color','whitesmoke')
+    //             $(document.body.getElementsByClassName("col")[winPos[0][0]].getElementsByClassName("box")[i]).html(`<p><del>${value}<del><p>`)
+    //         }
+    //     }
+    //     if(winPos[1]=="col"){
+    //         for(let i=winPos[0][0]; i<winPos[0][0]+3; i++){
+    //             $(document.body.getElementsByClassName("col")[i].getElementsByClassName("box")[winPos[0][1]]).css('background-color','whitesmoke')
+    //             $(document.body.getElementsByClassName("col")[i].getElementsByClassName("box")[winPos[0][1]]).html(`<p><del>${value}<del><p>`)
+    //         }
+    //     }
+    //     $(".message").append(`<p>Player ${value} Won! Congragtulation</p>`)
+    //     $(".message").css("display",'flex')
+        
+        
+    // }
+
+    // $("#restart").click(function(){
+    //     gameStarted=false;
+
+    //     $(".message").empty()
+    //     $(".message").css("display",'none');
+       
+    //     Array.from( document.body.getElementsByClassName("col")).forEach(
+    //         eachCol=>{
+    //             Array.from( eachCol.getElementsByClassName("box")).forEach(
+    //                 eachRow =>{
+    //                     $(eachRow).empty()
+    //                     $(eachRow).css('background-color','white')
+    //                 }
+
+    //             )
+
+                
+    //         }
+    //     )
+
+    //     bordData = emptyArray()
+        
+    // }
+    
+
+    // );
+    
+</script>
+<script src="script/index.js"></script>
+
+</html>
