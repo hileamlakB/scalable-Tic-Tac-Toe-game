@@ -98,6 +98,24 @@ function gameWon(winPos){
             $(document.body.getElementsByClassName("col")[i].getElementsByClassName("box")[winPos[0][1]]).html(`<p><del>${value}<del><p>`)
         }
     }
+    if(winPos[1]=="dig"){
+        let digCounter = 0
+        let i = winPos[0][0], j =winPos[0][1];
+        while(digCounter<3){
+            $(document.body.getElementsByClassName("col")[i+digCounter].getElementsByClassName("box")[j+digCounter]).css('background-color','whitesmoke')
+            $(document.body.getElementsByClassName("col")[i+digCounter].getElementsByClassName("box")[j+digCounter]).html(`<p><del>${value}<del><p>`)
+            digCounter++;
+        }
+    }
+    if(winPos[1]=="digRev"){
+        let digCounter = 0
+        let i = winPos[0][0], j =winPos[0][1];
+        while(digCounter<3){
+            $(document.body.getElementsByClassName("col")[i-digCounter].getElementsByClassName("box")[j+digCounter]).css('background-color','whitesmoke')
+            $(document.body.getElementsByClassName("col")[i-digCounter].getElementsByClassName("box")[j+digCounter]).html(`<p><del>${value}<del><p>`)
+            digCounter++;
+        }
+    }
     $(".message").append(`<p>Player ${value} Won! Congragtulation</p>`)
     $(".message").css("display",'flex')
     
@@ -129,8 +147,8 @@ $("#restart").click(
 );
 
 //todo
-// 1.diagonal wins
-// 2.AI
 // 3.Optimizations (draw before the game is over, dont check for a win before at list three moves into the game)
 //4.scaling
+// 2.AI
+
 //5.polishing win messages

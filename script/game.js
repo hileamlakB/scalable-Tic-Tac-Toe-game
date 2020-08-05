@@ -62,9 +62,50 @@ class ticTacToeJudge{
                 return colResult
             }
             else{
-                let digResult =  this.isOverInDig();
+
+                //now lets check the cse of the lower triagular matric
+                //where the digaonals are drawn from top to bottom left to write
+                let digResult =  this.isOverInDig(this.judgedGame.getBoard());
                 if (digResult){
                     return digResult
+                }
+
+                else{
+                    //now lets check the case of the upper triagular matrix
+                    //where the digaonals are drawn from top to bottom left to right
+                    let transposedDigResult =  this.isOverInDig(this.helper.transposeSquareList(this.judgedGame.getBoard()));
+                    if (transposedDigResult){
+                        return transposedDigResult
+                    }
+                    else{
+                        let reverseMap = {
+
+                        }
+                        for(let i=0;i<this.judgedGame.getBoard().length;i++){
+                            reverseMap[i] = this.judgedGame.getBoard().length - 1 - i
+
+                        }
+                         //now lets check the case of the upper triagular matrix
+                        //where the digaonals are drawn from bottom to top left to right
+                        let reversedDigResult =  this.isOverInDig(this.judgedGame.getBoard().reverse());
+                        if (reversedDigResult){
+                            reversedDigResult[1][0] = reverseMap[reversedDigResult[1][0]]
+                            reversedDigResult[2] = "digRev" 
+                            return reversedDigResult
+                        }
+
+                        else{
+                             //now lets check the case of the lower triagular matrix
+                            //where the digaonals are drawn from bottom to top left to right
+                            let transposedReversedDigResult =  this.isOverInDig(this.helper.transposeSquareList(this.judgedGame.getBoard().reverse()));
+                            if (transposedReversedDigResult){
+                                transposedReversedDigResult[1][0] = reverseMap[transposedReversedDigResult[1][0]]
+                                transposedReversedDigResult[2] = "digRev" 
+                                return transposedReversedDigResult
+                            }
+                        }
+                    }
+
                 }
             }
 
@@ -119,7 +160,7 @@ class ticTacToeJudge{
          //check if the game is over on the col
         //first reverse the list so that it can be treated 
         //as a col
-        let reversedBoard = this.helper.reverseSquareList(this.judgedGame.getBoard())
+        let reversedBoard = this.helper.transposeSquareList(this.judgedGame.getBoard())
         
         //check if the game is over in each col and if itsnt 
         //a win situation in any of the cols return a false at the end of 
@@ -145,7 +186,48 @@ class ticTacToeJudge{
         return false
     }
   
-    isOverInDig(){
+    isOverInDig(board){
+        //first prepare all the possible diagonals of length three that could
+        //possibly result in a win
+        
+
+        //this process will only work for one half of the diagonal
+        //the reversed list must be processed again so that the
+        //upper triangular matrix can also be handled
+        for(let j=board.length-1;j>=0;j--){
+            let listOfThree = []
+            let jTemp = j
+            let colCounter = 0
+            while (jTemp<board.length){
+                listOfThree.push(board[jTemp][colCounter])
+                colCounter++;
+                jTemp ++;
+            } 
+
+            //after pulling aout the possible digonlas
+            // the problem has now reduced to the row proplem so we can call the
+            //checkRow function when ever the length of the diagonal is greater 
+            //than or equal to
+
+            if(listOfThree.length>=3){
+                let digStatus = this.checkRow(listOfThree)
+                if (digStatus[0]){
+                    
+                    //[gameIsWons,[winningRow,winningCol],"the type of win"]
+                    //the location of the first winning element will be used in the display later
+                    //here locating the first wining postion is a bit tricky because both the colomun
+                    //and the width are changin in a diagonal so we will do use one nice propert of the 
+                    //dig
+                    return [true,[j+digStatus[1],digStatus[1]],"dig"]
+                    
+            
+                    
+
+                }
+            }
+        }
+
+
 
     }
 

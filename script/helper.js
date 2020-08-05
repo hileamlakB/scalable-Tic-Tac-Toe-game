@@ -24,7 +24,7 @@ class helperFunctions{
         return true;
     }
 
-    reverseSquareList(list){
+    transposeSquareList(list){
         let newList = []
         for(let i=0; i<list.length;i++){
             newList.push([])

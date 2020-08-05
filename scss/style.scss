@@ -1,5 +1,11 @@
 @import "mydefaults";
 
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .gameContainer{
 
     margin: 0 auto;
