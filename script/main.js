@@ -45,6 +45,7 @@ $("#playerId").change(
 
             )
             $('#player2').attr("disabled", "disabled");
+            $('select').attr("disabled", "disabled");
             $('#player2').val("Smart Bot")
         }
         $(".submit-btn").click(
@@ -213,6 +214,7 @@ function gameOver(winPos){
 $("#restart").click(
     function(){
         GAME.reset()
+        $('select').removeAttr("disabled")
         $(".controller").remove()
         $("#playerId").val('0')
         $(".headerInfo > p").remove()

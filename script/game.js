@@ -53,7 +53,8 @@ class ticTacToe{
         //after adding the current value into the board
         //change the player character to the next character
         this.turn = (this.turn==this.player1)?this.player2:this.player1
-        this.turn.yourTurn()
+        console.log("here2",this.turn.yourTurn())
+        // this.turn.yourTurn()
     }
     getBoard(){
         return this.board
