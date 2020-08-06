@@ -1,9 +1,7 @@
 # Scalable-Tic-Tac-Toe-game
 ## A scalable Tic Tac Toe Game using JS+Jquery
-This is tic tac toe game made in a webpage style. This game is a one page app made with javascript+jquery, html, css+scss. 
-This game is nice because it is scalabe in that the game isnt limited to the classical 3 by 3 board size. 
-It also has a multiplayer mode and also against computer mode.
-Enjoy!
+This is tic tac toe game made in a webpage style. This game is a one page app made with javascript+jquery, html, css+scss. The main purpose is to help me strength my scss and jquery skill in the mean time creating a fun game that propbably has never been played that will give you the ability to let infinite width and height while allowing infinte players including bots to play (that is however in principle but I am aiming there).
+Enjoy have Fun!
 
 
 
