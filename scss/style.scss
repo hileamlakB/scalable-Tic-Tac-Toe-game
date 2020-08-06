@@ -9,8 +9,6 @@ body{
 .gameContainer{
 
     margin: 0 auto;
-    width: 300px;
-    height: 350px;
     h1{
         width: 100%;
         text-align: center;
@@ -85,4 +83,80 @@ body{
     
 
 }
+.left{
+    width: (100vw- 300px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    select{
+        margin-top: 10px;
+        color: #0099ff;
+        font-size: 18px;
+        background-color: white;
+        border:1px solid #0099ff;
+        width:200px;
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 5px;
+        border: solid 1px #e0e7ee;
+        height: 42px;
+        line-height: 40px;
+        outline: none;
+        padding-left: 18px;
+        padding-right: 30px;
+        text-align: left !important;
+        transition: all 0.2s ease-in-out;
+        -webkit-user-select: none;
+        user-select: none;
+        white-space: nowrap;
+        box-shadow: none;
+        option{
+            outline: none;
+            box-shadow: none;
+            
+        }
+    }
+    label{
+        font-size: 20px;
+        color: #0099ff;
+        font-weight: bold;
+    }
+    .controller{
+        margin-top: 20px;
+    }
+    .player-container{
+        margin: 5px;
+    }
+    input[type='text']{
+        
+        outline: none;
+        background-color: white;
+
+        border: none;
+        border-bottom: 1px solid #0099ff;
+        padding-left: 18px;
+        padding-right: 30px;
+        text-align: left !important;
+        color: #0099ff;
+        outline: none;
+        padding: 4px 8px;
+        margin: 0 0 10px 4px;
+        font-size: 18px;
+
+    }
+    
+}
+.btn-primary{
+    padding:10px;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;    
+   
+    &:hover{
+        transform: scale(0.9);
+    }
+}

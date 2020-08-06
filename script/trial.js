@@ -45,3 +45,5 @@ function reverseSquareList(list){
 // doTheThing(reverseSquareList(tryAray))
 console.log(tryAray.reverse())
 doTheThing(reverseSquareList(tryAray.reverse()))
+
+// Sometimes when something is borrowed for so long it starts to feel like your own and you fight over it as if it is solely yours when the owners come to claim it. But understand the reality that a huge part of the Nile that originates in Ethiopia belongs to Ethiopia and Ethiopia has the full right to use it however she desire with out consulting anyone because it is hers. But Ethiopians aren't evil so they considers the well fair of the downstream nations and will try their best not to hurt them (but remember that is by no means an obligation). In the mean time Egypt should stop depending on someone's resources and use their own because Ethiopia has come to reclaim hers. In the coming years, Egypt should slowly stop depening the the Nile because Ethiopia is going to start depending on it a lot.

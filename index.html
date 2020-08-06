@@ -10,10 +10,40 @@
 
 <body>
     
-  
+  <div class="left">
+    <div>
+        <label for="against">Play Against: </label>
+        <select name="" id="playerId">
+    
+            <option selected value="0">
+    
+            </option>
+            <option value="1">
+                Computer
+            </option>
+            <option value="2">
+                Friend
+    
+            </option>
+        </select>
+       
+
+    </div>
+   
+    <div class="controller">
+        
+    </div>
+    
+
+  </div>
    
    <div class="gameContainer">
-       <h1>Tic Tac Toe</h1>
+        <div class="headerInfo">
+            <h1>Tic Tac Toe</h1>
+
+            <p></p>
+        </div>
+      
        <div class="gameBoard">
            <div class="paper">
                 <div class="col" id="0">
@@ -39,38 +69,21 @@
         </div>
    
        <!-- <button class="btn-primary">Play</button> -->
-       <div class="controller">
-           <label for="against">Play Against: </label>
-            <select name="" id="playerId">
-
-                <option value="0">
-
-                </option>
-                <option value="1">
-                    Computer
-                </option>
-                <option selected value="2">
-                    Friend
-
-                </option>
-            </select>
-        
-        <button class="btn-primary" id="restart">Restart</button>
-        
- 
-        
+       <button class="btn-primary" id="restart">Restart</button>
+      
+       
     </div>
-       
-       
-   </div>
 
   
       
    </div>
+   
 </body>
 
 <script src="script/helper.js"></script>
 <script src="script/game.js"></script>
+<script src="script/player.js"></script>
+<script src="script/AI.js"></script>
 <script src="script/main.js"></script>
 
 </html>

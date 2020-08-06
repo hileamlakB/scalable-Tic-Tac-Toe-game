@@ -2,9 +2,12 @@
 class ticTacToe{
     constructor(length){
         this.gameStarted = false
-        this.turn = "X"
+        this.player1 = undefined;
+        this.player2 = undefined;
         this.boardLength = length
         this.board = undefined;
+        this.judge = new ticTacToeJudge();
+        
     }
 
     squareArray (length){
@@ -18,30 +21,55 @@ class ticTacToe{
 
         return _
     }
-    start(){
-        this.gameStarted = true
+    start(player1, player2){
+
+        this.player1 = player1;
+        this.player2 = player2;
+       
+
+        this.turn = this.player1
         this.board = this.squareArray(this.boardLength )
+        this.gameStarted = true
+       
     }
     reset(){
         this.gameStarted = false
         this.board = this.squareArray(this.boardLength )
+        this.player1 = undefined;
+        this.player2 = undefined;
     }
 
     isStarted(){
         return this.gameStarted
     }
     appendToBoard(location){
-        this.board[location[0]][location[1]] = this.turn;
+        this.board[location[0]][location[1]] = this.turn.getCharacter();
+        let gameStatus = this.judge.isThisOver(this.board)
+        if(gameStatus){
+            gameStatus.push(this.turn)
+            return gameStatus
+
+        }
         //after adding the current value into the board
         //change the player character to the next character
-        this.turn = (this.turn=='X')?"O":"X"
+        this.turn = (this.turn==this.player1)?this.player2:this.player1
+        this.turn.yourTurn()
     }
     getBoard(){
         return this.board
     }
-    getTurn(){
+    getPlayerTurn(){
         return this.turn
     }
+
+    //only to be used by the AI player
+    AITurnOverrid(){
+        this.turn = (this.turn==this.player1)?this.player2:this.player1
+    }
+
+
+
+
 }
 
 
@@ -51,81 +79,80 @@ class ticTacToeJudge{
         this.judgedGame = game;
         this.helper = new helperFunctions()
     }
-    isOver(){
-        let rowResult = this.isOverInRow()
+    isThisOver(board){
+        let rowResult = this.isThisOverInRow(board)
         if (rowResult){
             return rowResult
         }
-        else{
-            let colResult = this.isOverInCol();
-            if (colResult){
-                return colResult
-            }
-            else{
-
-                //now lets check the cse of the lower triagular matric
-                //where the digaonals are drawn from top to bottom left to write
-                let digResult =  this.isOverInDig(this.judgedGame.getBoard());
-                if (digResult){
-                    return digResult
-                }
-
-                else{
-                    //now lets check the case of the upper triagular matrix
-                    //where the digaonals are drawn from top to bottom left to right
-                    let transposedDigResult =  this.isOverInDig(this.helper.transposeSquareList(this.judgedGame.getBoard()));
-                    if (transposedDigResult){
-                        return transposedDigResult
-                    }
-                    else{
-                        let reverseMap = {
-
-                        }
-                        for(let i=0;i<this.judgedGame.getBoard().length;i++){
-                            reverseMap[i] = this.judgedGame.getBoard().length - 1 - i
-
-                        }
-                         //now lets check the case of the upper triagular matrix
-                        //where the digaonals are drawn from bottom to top left to right
-                        let reversedDigResult =  this.isOverInDig(this.judgedGame.getBoard().reverse());
-                        if (reversedDigResult){
-                            reversedDigResult[1][0] = reverseMap[reversedDigResult[1][0]]
-                            reversedDigResult[2] = "digRev" 
-                            return reversedDigResult
-                        }
-
-                        else{
-                             //now lets check the case of the lower triagular matrix
-                            //where the digaonals are drawn from bottom to top left to right
-                            let transposedReversedDigResult =  this.isOverInDig(this.helper.transposeSquareList(this.judgedGame.getBoard().reverse()));
-                            if (transposedReversedDigResult){
-                                transposedReversedDigResult[1][0] = reverseMap[transposedReversedDigResult[1][0]]
-                                transposedReversedDigResult[2] = "digRev" 
-                                return transposedReversedDigResult
-                            }
-                        }
-                    }
-
-                }
-            }
-
+        
+        let colResult = this.isThisOverInCol(board);
+        if (colResult){
+            return colResult
         }
+           
+        //now lets check the cse of the lower triagular matric
+        //where the digaonals are drawn from top to bottom left to write
+        let digResult =  this.isThisOverInDig(board);
+        if (digResult){
+            return digResult
+        }
+
+                
+        //now lets check the case of the upper triagular matrix
+        //where the digaonals are drawn from top to bottom left to right
+        let transposedDigResult =  this.isThisOverInDig(this.helper.transposeSquareList(board));
+        if (transposedDigResult){
+            return transposedDigResult
+        }
+                 
+        //this eill be usefull as we are about to reverse the list but
+        //we need to keep trach of the old location so we will creat a map
+        //tha will give the old location base on the new one
+        let reverseMap = {}
+        for(let i=0;i<board.length;i++){
+            reverseMap[i] = board.length - 1 - i
+        }
+        
+        //now lets check the case of the upper triagular matrix
+        //where the digaonals are drawn from bottom to top left to right
+        let reversedDigResult =  this.isThisOverInDig(board.reverse());
+        if (reversedDigResult){
+            reversedDigResult[1][0] = reverseMap[reversedDigResult[1][0]]
+            reversedDigResult[2] = "digRev" 
+            return reversedDigResult
+        }
+
+                        
+        //now lets check the case of the lower triagular matrix
+        //where the digaonals are drawn from bottom to top left to right
+        let transposedReversedDigResult =  this.isThisOverInDig(this.helper.transposeSquareList(board.reverse()));
+        if (transposedReversedDigResult){
+            transposedReversedDigResult[1][0] = reverseMap[transposedReversedDigResult[1][0]]
+            transposedReversedDigResult[2] = "digRev" 
+            return transposedReversedDigResult
+        }
+
+        if(this.checkDraw(board)){
+            return [true,[],"draw"]
+        }                    
+
+         
 
         return false
             
 
     }
 
-    isOverInRow(){
+    isThisOverInRow(board){
         //check if the game is over in each row and if itsnt 
         //a win situation in any of the rows return a false at the end of 
         // the for loop
-        for (let i=0; i<this.judgedGame.getBoard().length;i++){
+        for (let i=0; i<board.length;i++){
         
             //in each raw different consecutive sections can have a
             //winning possibility so try each one by passing the 
             //the rows into the checkRow function
-            let rowStatus = this.checkRow(this.judgedGame.getBoard()[i])
+            let rowStatus = this.checkRow(board[i])
             //if the game is won return a won message
             if(rowStatus[0]){
                 //[gameIsWons,[winningRow,winningCol],"the type of win"]
@@ -149,18 +176,18 @@ class ticTacToeJudge{
             if(this.helper.checkEqualityList(row.slice(i,i+3))){
 
                 //return the location where the similar row started which in short is the columun 
-                //knowing this will be useful later in displaying the winner
+                //knowing this will be useful later in displaying the winner also return thre winner
                 return [true,i]
             }
         }
         return false
     }
 
-    isOverInCol(){
+    isThisOverInCol(board){
          //check if the game is over on the col
         //first reverse the list so that it can be treated 
         //as a col
-        let reversedBoard = this.helper.transposeSquareList(this.judgedGame.getBoard())
+        let reversedBoard = this.helper.transposeSquareList(board)
         
         //check if the game is over in each col and if itsnt 
         //a win situation in any of the cols return a false at the end of 
@@ -186,7 +213,7 @@ class ticTacToeJudge{
         return false
     }
   
-    isOverInDig(board){
+    isThisOverInDig(board){
         //first prepare all the possible diagonals of length three that could
         //possibly result in a win
         
@@ -231,13 +258,13 @@ class ticTacToeJudge{
 
     }
 
-    checkDraw(){
+    checkDraw(board){
 
         //the simple case of a draw where there are no more moves to play
-        for(let i=0; i<this.judgedGame.getBoard().length; i++)
+        for(let i=0; i<board.length; i++)
         {
-            for (let j=0;j<this.judgedGame.getBoard()[i].length;j++){
-                if (this.judgedGame.getBoard()[i][j]==""){
+            for (let j=0;j<board[i].length;j++){
+                if (board[i][j]==""){
                     return false
                 }
 
